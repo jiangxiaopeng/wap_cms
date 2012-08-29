@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html dir="ltr">
+<head>
+  <meta charset="utf-8">
+  <meta name="description" content="CMS">
+  <meta name="author" content="Cantiere Creativo @teamcantiere - Silvio Relli @silviorelli - Matteo Papadopoulos @spleenteo">
+  <meta name="generator" content="Ruby on Rails"/>
+  <meta name="format-detection" content="telephone=no"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+
+  <link rel="shortcut icon" href="/favicon.ico">
+
+  <!-- will render the page using Google Chrome rather than Internet Explorer -->
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+  <title><%= t "admin.general.railsyard_admin_panel" %> - <%= yield :title %></title>
+
+  <%= stylesheet_link_tag "/admin/stylesheets/all.css" %>
+  <%= stylesheet_link_tag('jquery.fileupload-ui') %>
+  <!--[if IE 6]>
+  <link rel="stylesheet" type="text/css" href="/admin/stylesheets/ie6.css" media="screen"/><![endif]-->
+  <!--[if IE 7]>
+  <link rel="stylesheet" type="text/css" href="/admin/stylesheets/ie.css" media="screen"/><![endif]-->
+
+  <%= javascript_include_tag "jquery.min",
+                             "jquery-ui.min",
+                             "jquery.tmpl.min",
+                             "jquery_ujs",
+                             "/admin/javascripts/jquery.livequery.js",
+                             "/admin/javascripts/jquery.ui.nestedSortable.js",
+                             "/admin/javascripts/livevalidation/livevalidation_standalone.js",
+                             "/admin/javascripts/tipsy/jquery.tipsy.js",
+                             "/admin/javascripts/uitotop/js/jquery.ui.totop.js",
+                             "/admin/javascripts/DataTables/jquery.dataTables.js",
+                             "/admin/javascripts/jquery.iframe-transport.js",
+                             "/admin/javascripts/jquery.fileupload.js",
+                             "/admin/javascripts/jquery.fileupload-ui.js",
+                             "/admin/javascripts/modernizr.js",
+                             "/admin/javascripts/application.js",
+                             "global"
+
+  %>
+
+  <%= csrf_meta_tag %>
+</head>
+<body>
+<div class="hive_16 clearfix">
+  <div class="cell_3">
+    <aside id="left_bar">
+      <a href="#" class="logo"><span>Railsyard CSM</span></a>
+
+      <section class="user clearfix">
+        <h3><%= current_user.email %></h3>
+        <%= image_tag "close.jpeg", :width => "55px" %>
+        <div class="user_details">
+
+          <ul>
+            <h2><%= t "admin.general.administrator" %></h2>
+            <li><%= link_to "个人信息" %> <span class="divider">|</span></li>
+            <li><%= link_to "退出",destroy_user_session_path,:method => :delete %></li>
+          </ul>
+        </div>
+      </section>
+      <!-- #user_wrap -->
+
+
+      <ul id="accordion">
+
+
+        <li>
+          <a <%= set_class(:class => "top_level", :controller => ["channel_videos","channels"]) %>><img src="/admin/images/icons/small/grey/YouTube.png"/>视频管理</a>
+          <ul class="drawer">
+            <li <%= set_class(:controller => "channel_videos", :action => "index") %>><%= link_to '视频库',channel_videos_path %></li>
+            <li <%= set_class(:controller => "channels", :action => "index") %>><%= link_to '频道管理' ,channels_path %></li>
+          </ul>
+        </li>
+        <li>
+          <a <%= set_class(:class => "top_level", :controller => ["today_videos","splendid_videos"]) %>><img src="/admin/images/icons/small/grey/HD 2.png"/>推荐管理</a>
+          <ul class="drawer">
+            <li <%= set_class(:controller => "today_videos", :action => "index") %>><%= link_to '今日推荐',today_videos_path %></li>
+            <li <%= set_class(:controller => "splendid_videos", :action => "index") %>><%= link_to '精彩推荐',splendid_videos_path %></li>
+          </ul>
+        </li>
+        <li>
+          <a <%= set_class(:class => "top_level", :controller => ["users","wap/users"]) %>><img src="/admin/images/icons/small/grey/Users.png"/>用户管理</a>
+          <ul class="drawer">
+            <!--<li <%= set_class(:controller => "users", :action => "index") %>><%= link_to 'cms用户' %></li>-->
+            <li <%= set_class(:controller => "wap/users", :action => "index") %>><%= link_to 'wap用户' %></li>
+          </ul>
+        </li>
+        <li>
+          <a <%= set_class(:class => "top_level", :controller => "stats") %>><img src="/admin/images/icons/small/grey/Write.png"/>统计管理</a>
+          <ul class="drawer">
+            <li <%= set_class(:controller => "stats", :action => "index") %>><%= link_to '视频统计' %></li>
+          </ul>
+        </li>
+
+      </ul>
+      <script type="text/javascript">
+          $(document).ready(function () {
+              $(function () {
+                  /*
+                   * Si apre l'accordion se un elemento
+                   * ha sia la classe this_controller che top_level
+                   */
+                  var top_level = $(".this_controller.top_level");
+                  var i = top_level.parent().prevAll().length;
+                  $("#accordion").accordion({active:i});
+
+                  /*
+                   * indivuo l'oggetto con classe this_action
+                   * per mettere il trinagolo al lato della barra
+                   */
+                  var basic_tr = $("#left_bar > .menu_triangle");
+                  basic_tr.clone().appendTo(".this_controller.this_action");
+                  basic_tr.remove();
+                  var tr = $(".menu_triangle", ".ui-accordion-content-active");
+                  tr.css({"display":"block" });
+              });
+          });
+      </script>
+
+      <div class="menu_triangle"></div>
+    </aside>
+    <!-- #sidebar -->
+  </div>
+
+  <div class="cell_13">
+    <div id="main_container" class="clearfix">
+      <%= yield %>
+    </div>
+  </div>
+
+
+</div>
+<!-- #wrapper -->
+<div class="hive_16">
+  <footer id="template_options" class="clearfix">
+    Railsyard CMS &bull; v.0.2.0
+  </footer>
+</div>
+
+</body>
+</html>

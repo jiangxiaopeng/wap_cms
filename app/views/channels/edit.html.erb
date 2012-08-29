@@ -1,0 +1,15 @@
+<section class="">
+  <% unless @channel.errors.blank? %>
+      <div class="alert alert_red">
+        <img height="24" width="24" src="/admin/images/icons/small/white/Alarm%20Bell.png">
+        <%= t "admin.general.errors" %>: <%= errors_for @channel %>
+      </div>
+  <% end %>
+</section>
+<%= form_for @channel, :url => channel_path(@channel),:html => {:name => "form", :multipart => :true} do |v| %>
+    <%= render :partial => "form", :object => @channel, :as => :video, :locals => {:v => v} %>
+    <div class="buttons">
+      <%= submit_tag "修改"%>
+      <%= link_to '返回' ,channels_url,:class => 'submit'%>
+    </div>
+<% end %>

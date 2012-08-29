@@ -1,0 +1,23 @@
+<html>
+<script language="javascript">
+<!--
+function sub(){
+    document.form1.submit();
+    window.close();
+}
+//-->
+</script>
+<%= javascript_include_tag "global" %>
+<body onunload="window.opener.location.reload();">
+<%= form_for :dialog, :url => {:action => "modify"}, :html => {:method=>"post",:name => "form1",:id=>"form1"} do %>
+    <%= hidden_field_tag :id,@id %>
+    <div style="text-align: center;">
+      <div style="margin-bottom: 20px;"><%= radio_button_tag "video_type", 2, true %>今日推荐  <%= radio_button_tag "video_type", 3 %>精彩推荐</div>
+      <div class="buttons">
+        <%= submit_tag '提交',:name=>'type',:class => 'button',:onclick=>"submit_form();"%>
+        <%= tag "input", {"type" => "button", "value" => "取消", "onclick" => 'javascript:self.close();'} %>
+      </div>
+    </div>
+<% end %>
+</body>
+</html>

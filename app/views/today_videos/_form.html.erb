@@ -1,0 +1,32 @@
+<div class="wrap block">
+  <div class="">
+    <div class="block">
+      <label for="video_id">视频ID</label>
+      <%= @video.video_id %>
+      <label for="title">视频名称</label>
+      <%= v.text_field :title, :size => 80, :title => "This field can't be left blank" %>
+      <label for="video_source">视频源出处</label>
+      <%= v.text_field :video_source, :size => 80, :title => "This field can't be left blank" %>
+      <label for="video_director">导演</label>
+      <%= v.text_field :video_director, :size => 80, :title => "This field can't be left blank" %>
+      <label for="video_performer">演员</label>
+      <%= v.text_field :video_performer, :size => 80, :title => "This field can't be left blank" %>
+      <label for="video_time">时长</label>
+      <%= v.text_field :video_time, :size => 80, :title => "This field can't be left blank" %>
+      <label for="video_size">视频大小</label>
+      <%= v.text_field :video_size, :size => 80, :title => "This field can't be left blank" %>
+      <label for="video_focus">看点时间</label>
+      <%= v.text_field :video_focus, :size => 80, :title => "This field can't be left blank" %>
+      <label for="video_url">上传视频</label>
+      <%= v.text_field :video_url, :size => 80, :title => "This field can't be left blank" %>
+      <%= file_field_tag 'video_file', :class => "file" %>
+
+      <label for="video_img">上传图片</label>
+      <% if @video.video_img != nil %>
+          <%= image_tag @video.video_img, :width => 80 %>  <br/>
+      <% end %>
+      <%= file_field_tag 'img_file', :class => "file" %>
+
+    </div>
+  </div>
+</div>

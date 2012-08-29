@@ -1,0 +1,21 @@
+<h1>Listing wap_users</h1>
+
+<table>
+  <tr>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @wap_users.each do |wap_user| %>
+  <tr>
+    <td><%= link_to 'Show', wap_user %></td>
+    <td><%= link_to 'Edit', edit_wap_user_path(wap_user) %></td>
+    <td><%= link_to 'Destroy', wap_user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New User', new_wap_user_path %>

@@ -1,0 +1,15 @@
+<section class="">
+  <% unless @video.errors.blank? %>
+      <div class="alert alert_red">
+        <img height="24" width="24" src="/admin/images/icons/small/white/Alarm%20Bell.png">
+        <%= t "admin.general.errors" %>: <%= errors_for @video %>
+      </div>
+  <% end %>
+</section>
+<%= form_for @video, :url => today_videos_path,:html => {:name => "form", :multipart => :true} do |v| %>
+    <%= render :partial => "form", :object => @video, :as => :video, :locals => {:v => v} %>
+<div class="buttons">  
+	<%= submit_tag "提交"%>
+	<%= link_to '返回' ,today_videos_url,:class => 'submit'%>
+</div>
+<% end %>

@@ -1,0 +1,30 @@
+<header class="page_description">
+  <h2>频道</h2>
+
+    <div style="margin-bottom:10px;float: left;"> <%= button_to "添加频道", new_channel_path %></div>
+</header>
+
+<div class="wrap cell_16 round_all">
+  <table class="fancy_rows datatable">
+
+    <thead>
+    <tr>
+      <th>频道ID</th>
+      <th>频道标题</th>
+      <th>操作</th>
+    </tr>
+    </thead>
+    <tbody>
+    <% @channels.each do |channel| %>
+        <tr>
+          <td><%= channel.cid %></td>
+          <td><%= channel.title %></td>
+          <td style="text-align:center;">
+            <%= link_to image_tag("edit.png"), edit_channel_path(channel) %>
+            <%= link_to image_tag("delete.png"), channel_path(channel), :confirm => "Are you sure?", :method => :delete %>
+          </td>
+        </tr>
+    <% end %>
+    </tbody>
+  </table>
+</div>
