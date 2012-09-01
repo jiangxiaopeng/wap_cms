@@ -69,11 +69,11 @@ class ChannelVideosController < ApplicationController
     @video.video_id = Utils.videoid
     
     if video_file != nil
-      @video.video_url = "http://#{Constants::UPLOAD_IP}/files/"+Utils.upload(video_file, videoid)
+      @video.video_url = "http://#{Constants::UPLOAD_IP}/files/images/"+Utils.upload(video_file, videoid)
     end
 
     if img_file != nil
-      @video.video_img ="http://#{Constants::UPLOAD_IP}/files/"+Utils.upload(img_file, nil)
+      @video.video_img ="http://#{Constants::UPLOAD_IP}/files/videos/"+Utils.upload(img_file, nil)
     end
     @video.cid = @channel
     respond_to do |format|
