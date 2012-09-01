@@ -33,13 +33,14 @@
       <%= v.text_field :privilege_price, :size => 80, :title => "This field can't be left blank" %>
 
       <label for="video_url">上传视频</label>
-     <%= v.text_field :video_url, :size => 80, :title => "This field can't be left blank" %><br/>
+      <%= v.text_field :video_url, :size => 80, :title => "This field can't be left blank" %><br/>
       <%= file_field_tag 'video_file', :class => "file" %>
 
       <label for="video_img">上传图片</label>
       <% if @video.video_img != nil %>
           <%= image_tag @video.video_img, :width => 80 %>  <br/>
       <% end %>
+      <%= v.text_field :video_img, :size => 80, :title => "This field can't be left blank" %><br/>
       <%= file_field_tag 'img_file', :class => "file" %>
 
     </div>
