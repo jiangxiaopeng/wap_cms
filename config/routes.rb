@@ -6,7 +6,7 @@ WapCms::Application.routes.draw do
   resources :splendid_videos
   resources :channel_videos
   resources :channels
-
+  resources :stats
   resources :dialogs do
     collection do
       get :window
