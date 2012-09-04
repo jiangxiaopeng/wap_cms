@@ -1,0 +1,14 @@
+<div class="wrap block">
+  <div class="">
+    <div class="block">
+      <label for="video_id">视频ID</label>
+      <%= @stat.video_id %>
+      <label for="title">视频名称</label>
+      <%= @stat.title %>
+      <label for="purchase_count">购买次数</label>
+      <%= s.text_field :purchase_count, :size => 80, :title => "This field can't be left blank" %>
+      <label for="play_count">播放次数</label>
+      <%= s.text_field :play_count, :size => 80, :title => "This field can't be left blank" %>
+    </div>
+  </div>
+</div>

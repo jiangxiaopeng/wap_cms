@@ -1,0 +1,50 @@
+<header class="page_description">
+  <h2>精彩推荐</h2>
+
+  <!--<div style="margin-bottom:10px;"> <%= button_to "添加视频", new_today_video_path %></div>-->
+  <div>
+
+    <div style="margin-bottom:10px;margin-left:20px;float: left;">
+      <%= form_for(:stat, :url => {:action => 'batch'}, :html => {:method => 'post'}) do %>
+          <%= submit_tag "同步视频" %>
+      <% end %>
+    </div>
+    <div style="margin-bottom:10px;margin-left:20px;float: left;">
+      <%= form_tag('/stats', :method => 'get') do %>
+          视频标题:<%= text_field_tag :title, params[:title], :size => 50 %>
+          <%= submit_tag "查询", :class => "button" %>
+      <% end %>
+    </div>
+  </div>
+</header>
+
+<div class="wrap cell_16 round_all">
+  <table class="fancy_rows datatable">
+
+    <thead>
+    <tr>
+      <th>视频ID</th>
+      <th>视频标题</th>
+      <th>购买次数</th>
+      <th>播放次数</th>
+      <th>操作</th>
+    </tr>
+    </thead>
+    <tbody>
+    <% @stats.each do |stat| %>
+        <tr>
+          <td><%= stat.video_id %></td>
+          <td><%= stat.title %></td>
+          <td><%= stat.purchase_count %></td>
+          <td><%= stat.play_count %></td>
+          <td><%= link_to image_tag("edit.png"), edit_stat_path(stat) %></td>
+        </tr>
+    <% end %>
+    </tbody>
+    <tfoot>
+    <tr>
+      <td colspan="6"><%= paginate @stats %></td>
+    </tr>
+    </tfoot>
+  </table>
+</div>

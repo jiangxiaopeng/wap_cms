@@ -1,0 +1,16 @@
+<section class="">
+  <% unless @stat.errors.blank? %>
+      <div class="alert alert_red">
+        <img height="24" width="24" src="/admin/images/icons/small/white/Alarm%20Bell.png">
+        <%= t "admin.general.errors" %>: <%= errors_for @stat %>
+      </div>
+  <% end %>
+</section>
+<%= form_for @stat, :url => stat_path(@stat),:html => {:name => "form", :multipart => :true} do |s| %>
+    <%= render :partial => "form", :object => @stat, :as => :video, :locals => {:s => s} %>
+    <%= hidden_field_tag :title,@stat.title %>
+    <div class="buttons">
+      <%= submit_tag "修改"%>
+      <%= link_to '返回' ,stats_path(:title=>@stat.title),:class => 'submit'%>
+    </div>
+<% end %>
