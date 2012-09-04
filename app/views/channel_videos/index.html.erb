@@ -42,7 +42,9 @@
           </td>
           <td><%= @videos[i].original_price %></td>
           <td><%= @videos[i].privilege_price %></td>
-          <td><%= tag "input", { "type" => "button", "value" => "推荐" ,"onclick" => "openwindow('/dialogs/window?id=#{@videos[i].id}','',320,100);"} %></td>
+          <td><%= tag "input", { "type" => "button", "value" => "今日" ,"onclick" => "using('/channel_videos/using/#{@videos[i].id}?video_type=2&forminfo=#{@channel}')"} %>
+	      <%= tag "input", { "type" => "button", "value" => "精彩" ,"onclick" => "using('/channel_videos/using/#{@videos[i].id}?video_type=3&forminfo=#{@channel}')"} %>
+	      </td>
           <td style="text-align:center;">
             <%= link_to image_tag("edit.png"), edit_channel_video_path(@videos[i],:forminfo=>@channel) %>
             <%= link_to image_tag("delete.png"), channel_video_path(@videos[i],:forminfo=>@channel), :confirm => "Are you sure?", :method => :delete %>
