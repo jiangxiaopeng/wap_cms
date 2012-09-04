@@ -67,13 +67,13 @@ class ChannelVideosController < ApplicationController
     img_file = params[:img_file]
     @video.video_type = params[:video_type]
     @video.video_id = Utils.videoid
-    
+
     if video_file != nil
-      @video.video_url = "http://#{Constants::UPLOAD_IP}/files/images/"+Utils.upload(video_file, videoid)
+      @video.video_url = "http://#{Constants::UPLOAD_IP}/files/videos/"+Utils.upload(video_file, videoid)
     end
 
     if img_file != nil
-      @video.video_img ="http://#{Constants::UPLOAD_IP}/files/videos/"+Utils.upload(img_file, nil)
+      @video.video_img ="http://#{Constants::UPLOAD_IP}/files/images/"+Utils.upload(img_file, nil)
     end
     @video.cid = @channel
     respond_to do |format|
@@ -94,11 +94,11 @@ class ChannelVideosController < ApplicationController
 
     if video_file != nil
       videoid = Utils.videoid
-      @video.video_url = "http://#{Constants::UPLOAD_IP}/files/"+Utils.upload(video_file, videoid)
+      @video.video_url = "http://#{Constants::UPLOAD_IP}/files/videos/"+Utils.upload(video_file, videoid)
     end
 
     if img_file != nil
-      @video.video_img ="http://#{Constants::UPLOAD_IP}/files/"+Utils.upload(img_file, nil)
+      @video.video_img ="http://#{Constants::UPLOAD_IP}/files/images/"+Utils.upload(img_file, nil)
     end
 
     respond_to do |format|
@@ -119,5 +119,13 @@ class ChannelVideosController < ApplicationController
     respond_to do |format|
       format.html { redirect_to channel_videos_url }
     end
+  end
+
+  def using
+    @channel = params[:forminfo]
+    @video = Video.find(params[:id])
+    @new_video = Video.new.cms_videos(@video,params[:video_type])
+    @new_video.save 
+    redirect_to :action => "index",:forminfo => @channel
   end
 end

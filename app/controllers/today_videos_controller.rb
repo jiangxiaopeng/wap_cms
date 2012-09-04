@@ -103,7 +103,7 @@ class TodayVideosController < ApplicationController
   def using
     @channel = params[:forminfo]
     @video = Video.find(params[:id])
-    @video.update_attributes(:video_type=>params[:video_type])
+    @video.destroy
     redirect_to :action => "index",:forminfo => @channel
   end
 end
