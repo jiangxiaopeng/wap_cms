@@ -4,7 +4,7 @@ class TodayVideosController < ApplicationController
   # GET /today_videos.json
   def index
   
-    @videos = Video.where(:video_type => 2).order(:id)
+    @videos = Video.where(:video_type => 2).order("id DESC")
 
     respond_to do |format|
       format.html # index.html.erb
