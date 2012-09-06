@@ -18,7 +18,7 @@ class SplendidVideosController < ApplicationController
       @channel = @channels[0].cid rescue 0
     end
 
-    @videos = Video.where(:video_type => 3,:cid => @channel).order(:id)
+    @videos = Video.where(:video_type => 3,:cid => @channel).order("id DESC")
     respond_to do |format|
       format.html # index.html.erb
     end
