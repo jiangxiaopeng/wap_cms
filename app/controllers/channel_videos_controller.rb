@@ -18,7 +18,7 @@ class ChannelVideosController < ApplicationController
       @channel = @channels[0].cid rescue 0
     end
 
-    @videos = Video.where(:video_type => 1,:cid => @channel).order(:id)
+    @videos = Video.where(:video_type => 1,:cid => @channel).order("id DESC")
     if current_user != nil
       respond_to do |format|
         format.html # index.html.erb
